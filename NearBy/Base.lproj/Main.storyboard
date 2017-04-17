@@ -21,15 +21,26 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search Category" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PNb-rk-SwF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="l1e-VU-TZB"/>
+                                </connections>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t8j-SG-HvU">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NearMeTableViewCell" id="dai-4c-YfB" customClass="NearMeTableViewCell" customModule="NearBy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dai-4c-YfB" id="F0h-Yb-Qbn">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOm-oU-qfL">
@@ -59,10 +70,14 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="t8j-SG-HvU" secondAttribute="trailing" id="cac-LJ-rb7"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="t8j-SG-HvU" secondAttribute="bottom" id="f7s-tj-VMV"/>
-                            <constraint firstItem="t8j-SG-HvU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="glW-RH-Fph"/>
-                            <constraint firstItem="t8j-SG-HvU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="pWs-yv-U4h"/>
+                            <constraint firstItem="t8j-SG-HvU" firstAttribute="top" secondItem="PNb-rk-SwF" secondAttribute="bottom" id="JCS-th-mr4"/>
+                            <constraint firstItem="t8j-SG-HvU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JIg-bp-GrE"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="t8j-SG-HvU" secondAttribute="bottom" id="N0W-sw-4rC"/>
+                            <constraint firstItem="PNb-rk-SwF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="b65-YK-hOn"/>
+                            <constraint firstAttribute="trailing" secondItem="t8j-SG-HvU" secondAttribute="trailing" id="eoY-xv-lVU"/>
+                            <constraint firstAttribute="trailing" secondItem="PNb-rk-SwF" secondAttribute="trailing" id="nv2-eK-hgW"/>
+                            <constraint firstItem="PNb-rk-SwF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="sCd-Mj-EWv"/>
+                            <constraint firstItem="t8j-SG-HvU" firstAttribute="top" secondItem="PNb-rk-SwF" secondAttribute="bottom" id="u03-eV-r0M"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Categories" id="XRV-DO-Yg6"/>

@@ -16,6 +16,8 @@ class PointOfPlacesVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     
     var places = [Place]()
     
+    var searchResultsPlaces = [Place]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +43,8 @@ class PointOfPlacesVC: UIViewController,UITableViewDelegate, UITableViewDataSour
                             
                             self.places.append(place)
                         }
+                        self.searchResultsPlaces = self.places
+                        
                         self.tblView.alpha = 1.0
                         self.tblView.reloadData()
                     }
@@ -57,14 +61,14 @@ class PointOfPlacesVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.places.count
+        return self.searchResultsPlaces.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "NearMeTableViewCell", for: indexPath) as! NearMeTableViewCell
         
-        let place = self.places[indexPath.row]
+        let place = self.searchResultsPlaces[indexPath.row]
         
         cell.titleLabel.text = place.title
         return cell
@@ -72,7 +76,7 @@ class PointOfPlacesVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "MapVC") as! MapVC
-         let place = self.places[indexPath.row]
+         let place = self.searchResultsPlaces[indexPath.row]
         vc.strCategory = place.title
         self.navigationController?.pushViewController(vc, animated: true)
         
@@ -86,5 +90,67 @@ class PointOfPlacesVC: UIViewController,UITableViewDelegate, UITableViewDataSour
      // Pass the selected object to the new view controller.
      }
      */
+    
+}
+extension PointOfPlacesVC: UISearchBarDelegate
+{
+    public func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        return true
+    }
+    public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+        if searchBar.text == "" {
+            self.searchResultsPlaces = self.places
+            tblView.reloadData()
+        }else{
+            
+            return
+        }
+    }
+    
+    public func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        return true
+    }
+    
+    public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+        if searchBar.text == "" {
+           
+            self.searchResultsPlaces = self.places
+            tblView.reloadData()
+        }else {
+            return
+        }
+    }
+    
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            self.searchResultsPlaces = self.places
+        }else {
+            
+            self.searchResultsPlaces = []
+            
+            for string in self.places {
+                
+                if string.title.lowercased().hasPrefix(searchText.lowercased()) {
+                    self.searchResultsPlaces.append(string)
+                }
+            }
+        }
+        tblView.reloadData()
+        
+    }
+    public func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool{
+        return true
+    }
+    
+    public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        self.searchResultsPlaces = self.places
+        
+        tblView.reloadData()
+    }
     
 }
