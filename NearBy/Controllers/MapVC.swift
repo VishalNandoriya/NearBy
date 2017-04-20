@@ -27,7 +27,7 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = strCategory
         self.locationManager = CLLocationManager()
         self.mapviews.delegate = self
         self.mapviews.showsUserLocation = true
@@ -43,7 +43,7 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestAlwaysAuthorization()
+            //locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
         }
         locationManager.startUpdatingHeading()
@@ -59,8 +59,8 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
                          didUpdateLocations locations: [CLLocation]) {
         
         locValue = manager.location!.coordinate
-        let region = MKCoordinateRegion(center: locValue, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-                self.mapviews.setRegion(region, animated: true)
+//        let region = MKCoordinateRegion(center: locValue, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+//                self.mapviews.setRegion(region, animated: true)
         self.userCoordinate = CLLocationCoordinate2DMake(locValue.latitude, locValue.longitude)
         self.locationManager.stopUpdatingLocation()
         self.startSearch(strCategory)
