@@ -76,9 +76,15 @@ class PointOfPlacesVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "MapVC") as! MapVC
-         let place = self.searchResultsPlaces[indexPath.row]
+        let place = self.searchResultsPlaces[indexPath.row]
         vc.strCategory = place.title
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        let drawerContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerContentViewController")
+
+        let pulleyDrawerVC = PulleyViewController(contentViewController: vc, drawerViewController: drawerContentVC)
+        
+        self.navigationController?.pushViewController(pulleyDrawerVC, animated: true)
+
         
     }
        /*

@@ -13,6 +13,10 @@
 		E70713B81EA1095D00D3A5E7 /* PlaceAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70713B01EA1095D00D3A5E7 /* PlaceAnnotation.swift */; };
 		E70713B91EA1095D00D3A5E7 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = E70713B21EA1095D00D3A5E7 /* categories.json */; };
 		E70713BA1EA1095D00D3A5E7 /* NearMeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70713B41EA1095D00D3A5E7 /* NearMeTableViewCell.swift */; };
+		E71D10971EA9DB7200D4886C /* DrawerContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71D10961EA9DB7200D4886C /* DrawerContentViewController.swift */; };
+		E71D109A1EA9DB9600D4886C /* PulleyPassthroughScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71D10981EA9DB9600D4886C /* PulleyPassthroughScrollView.swift */; };
+		E71D109B1EA9DB9600D4886C /* PulleyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71D10991EA9DB9600D4886C /* PulleyViewController.swift */; };
+		E71D109E1EAA054600D4886C /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71D109D1EAA054600D4886C /* CategoryCell.swift */; };
 		E756EC641EA0985600D89DA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756EC631EA0985600D89DA0 /* AppDelegate.swift */; };
 		E756EC691EA0985600D89DA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E756EC671EA0985600D89DA0 /* Main.storyboard */; };
 		E756EC6B1EA0985600D89DA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E756EC6A1EA0985600D89DA0 /* Assets.xcassets */; };
@@ -26,6 +30,10 @@
 		E70713B01EA1095D00D3A5E7 /* PlaceAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceAnnotation.swift; sourceTree = "<group>"; };
 		E70713B21EA1095D00D3A5E7 /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		E70713B41EA1095D00D3A5E7 /* NearMeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearMeTableViewCell.swift; sourceTree = "<group>"; };
+		E71D10961EA9DB7200D4886C /* DrawerContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerContentViewController.swift; sourceTree = "<group>"; };
+		E71D10981EA9DB9600D4886C /* PulleyPassthroughScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulleyPassthroughScrollView.swift; sourceTree = "<group>"; };
+		E71D10991EA9DB9600D4886C /* PulleyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulleyViewController.swift; sourceTree = "<group>"; };
+		E71D109D1EAA054600D4886C /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		E756EC601EA0985600D89DA0 /* NearBy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearBy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E756EC631EA0985600D89DA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E756EC681EA0985600D89DA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -50,6 +58,7 @@
 			children = (
 				E70713AC1EA1095D00D3A5E7 /* MapVC.swift */,
 				E70713AD1EA1095D00D3A5E7 /* PointOfPlacesVC.swift */,
+				E71D10961EA9DB7200D4886C /* DrawerContentViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -66,6 +75,8 @@
 		E70713B11EA1095D00D3A5E7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E71D10981EA9DB9600D4886C /* PulleyPassthroughScrollView.swift */,
+				E71D10991EA9DB9600D4886C /* PulleyViewController.swift */,
 				E70713B21EA1095D00D3A5E7 /* categories.json */,
 			);
 			path = Resources;
@@ -75,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				E70713B41EA1095D00D3A5E7 /* NearMeTableViewCell.swift */,
+				E71D109D1EAA054600D4886C /* CategoryCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -185,11 +197,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				E70713B61EA1095D00D3A5E7 /* PointOfPlacesVC.swift in Sources */,
+				E71D10971EA9DB7200D4886C /* DrawerContentViewController.swift in Sources */,
+				E71D109B1EA9DB9600D4886C /* PulleyViewController.swift in Sources */,
 				E70713B81EA1095D00D3A5E7 /* PlaceAnnotation.swift in Sources */,
+				E71D109A1EA9DB9600D4886C /* PulleyPassthroughScrollView.swift in Sources */,
 				E756EC641EA0985600D89DA0 /* AppDelegate.swift in Sources */,
 				E70713B51EA1095D00D3A5E7 /* MapVC.swift in Sources */,
 				E70713B71EA1095D00D3A5E7 /* Place.swift in Sources */,
 				E70713BA1EA1095D00D3A5E7 /* NearMeTableViewCell.swift in Sources */,
+				E71D109E1EAA054600D4886C /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

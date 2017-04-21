@@ -11,5 +11,4 @@ import UIKit
 class NearMeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel :UILabel! 
-    
 }

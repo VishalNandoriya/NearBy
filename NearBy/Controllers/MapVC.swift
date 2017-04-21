@@ -10,8 +10,15 @@ import UIKit
 import MapKit
 import CoreLocation
 
+@objc public protocol NearByDelegate: class {
+    
+    @objc optional func drawerPositionDidChange(mapListData: NSArray)
+}
+
+
 class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
     
+    var delegate : NearByDelegate?
     var boundingRegion : MKCoordinateRegion = MKCoordinateRegion()
     var localSearch : MKLocalSearch!
     var locationManager : CLLocationManager!
@@ -28,7 +35,7 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = strCategory
+        self.navigationItem.title = strCategory
         self.locationManager = CLLocationManager()
         self.mapviews.delegate = self
         self.mapviews.showsUserLocation = true
@@ -101,6 +108,7 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
             else {
                 self.places = response!.mapItems
                 self.mapItemList = self.places
+                let placeMarks: NSMutableArray = NSMutableArray()
 
                 //Add annotation
                 for item in self.mapItemList {
@@ -110,7 +118,11 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
                     annotation.url = item.url
                     annotation.detailAddress = item.placemark.title
                     self.mapviews!.addAnnotation(annotation)
+                    placeMarks.add(item)
+
                 }
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NotificationMapData"), object: placeMarks)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "categoryName"), object: self.strCategory)
 
                 self.boundingRegion = response!.boundingRegion
             }
@@ -146,7 +158,7 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
         }
         return annotationView
     }
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    /*func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         if (viewDetail != nil) {
             self.HideView(view: viewDetail)
@@ -157,7 +169,7 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
         
         self.showDetailView(title: placeName!, address: detailAddress!)
         self.showView(view: viewDetail)
-    }
+    }*/
     //Call out detailDisclosure
     /*func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
@@ -171,7 +183,7 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
         self.showDetailView(title: placeName!, address: detailAddress!)
         self.showView(view: viewDetail)
     }*/
-    func showDetailView(title:String,address:String)
+    /*func showDetailView(title:String,address:String)
     {
         let screenSize: CGRect = UIScreen.main.bounds
 
@@ -208,7 +220,7 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
             view.frame = CGRect(x: 0, y: self.view.frame.size.height, width: screenSize.width, height: 100)
             
         }, completion: nil)
-    }
+    }*/
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -225,4 +237,16 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
     }
     */
 
+}
+extension MapVC: PulleyPrimaryContentControllerDelegate {
+    
+    func makeUIAdjustmentsForFullscreen(progress: CGFloat)
+    {
+        
+    }
+    
+    func drawerChangedDistanceFromBottom(drawer: PulleyViewController, distance: CGFloat)
+    {
+        
+    }
 }
