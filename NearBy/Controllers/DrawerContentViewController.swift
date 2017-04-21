@@ -1,9 +1,9 @@
 //
-//  DrawerPreviewContentViewController.swift
-//  Pulley
+//  Place.swift
+//  NearBy
 //
-//  Created by Brendan Lee on 7/6/16.
-//  Copyright © 2016 52inc. All rights reserved.
+//  Created by Mac-Vishal on 14/04/17.
+//  Copyright © 2017 Vishal. All rights reserved.
 //
 
 import UIKit
