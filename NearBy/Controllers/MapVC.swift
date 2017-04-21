@@ -20,6 +20,7 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
     let authorizationStatus = CLLocationManager.authorizationStatus()
     var places: [MKMapItem] = []
     var strCategory : String!
+    var viewDetail : UIView!
     
     var mapItemList: [MKMapItem] = []
     
@@ -47,7 +48,6 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
             locationManager.requestWhenInUseAuthorization()
         }
         locationManager.startUpdatingHeading()
-        
         
         // Do any additional setup after loading the view.
     }
@@ -108,7 +108,7 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
                     annotation.coordinate = item.placemark.location!.coordinate
                     annotation.title = item.name
                     annotation.url = item.url
-                    
+                    annotation.detailAddress = item.placemark.title
                     self.mapviews!.addAnnotation(annotation)
                 }
 
@@ -136,13 +136,79 @@ class MapVC: UIViewController, MKMapViewDelegate ,CLLocationManagerDelegate {
             
             if annotationView == nil {
                 annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
-                annotationView!.canShowCallout = true
+                //annotationView!.canShowCallout = true
                 annotationView!.animatesDrop = true
+                
+                //Call out detailDisclosure
+                /*let detailButton = UIButton(type: .detailDisclosure) as UIView
+                annotationView?.rightCalloutAccessoryView = detailButton*/
             }
         }
         return annotationView
     }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        if (viewDetail != nil) {
+            self.HideView(view: viewDetail)
+        }
+        let capital = view.annotation as! PlaceAnnotation
+        let placeName = capital.title
+        let detailAddress = capital.detailAddress
+        
+        self.showDetailView(title: placeName!, address: detailAddress!)
+        self.showView(view: viewDetail)
+    }
+    //Call out detailDisclosure
+    /*func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if (viewDetail != nil) {
+            self.HideView(view: viewDetail)
+        }
+        let capital = view.annotation as! PlaceAnnotation
+        let placeName = capital.title
+        let detailAddress = capital.detailAddress
 
+        self.showDetailView(title: placeName!, address: detailAddress!)
+        self.showView(view: viewDetail)
+    }*/
+    func showDetailView(title:String,address:String)
+    {
+        let screenSize: CGRect = UIScreen.main.bounds
+
+        viewDetail = UIView(frame: CGRect(x: 0, y: self.view.frame.size.height, width: screenSize.width, height: 100))
+        viewDetail.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        self.view.addSubview(viewDetail)
+        
+        let labelTitle = UILabel(frame: CGRect(x: 5, y: 5, width: screenSize.width-10, height: 21))
+        
+        labelTitle.textColor = UIColor.black
+        let strAddress = String(format: "Title:%@", title)
+        labelTitle.text = strAddress
+        viewDetail.addSubview(labelTitle)
+        
+        let labelAddress = UILabel(frame: CGRect(x: 5, y: 30, width: screenSize.width-10, height: 60))
+        
+        labelAddress.textColor = UIColor.black
+        let strDetailAddress = String(format: "Address:%@", address)
+        labelAddress.text = strDetailAddress
+        viewDetail.addSubview(labelAddress)
+    }
+    func showView(view: UIView) {
+        UIView.animate(withDuration: 0.50, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0, options: [], animations: {
+            let screenSize: CGRect = UIScreen.main.bounds
+            
+            view.frame = CGRect(x: 0, y: self.view.frame.size.height - 100 , width: screenSize.width, height: 100)
+            
+        }, completion: nil)
+    }
+    func HideView(view: UIView) {
+        UIView.animate(withDuration: 0.50, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0, options: [], animations: {
+            let screenSize: CGRect = UIScreen.main.bounds
+            
+            view.frame = CGRect(x: 0, y: self.view.frame.size.height, width: screenSize.width, height: 100)
+            
+        }, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
